@@ -4,8 +4,16 @@ Licensed under the MIT License. See LICENSE file for details.
 */
 
 /*
-Page layout, mobile first.
+Page layout, mobile first: the hero fills the first screen on its own, the download section and the footer follow
+below. A round arrow button at the bottom of the hero shows that the page continues and scrolls to the downloads.
 */
+
+/* in-page links (the arrow button) glide instead of jumping, unless the visitor prefers reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
 
 /* Header: the switches sit top right over the hero and scroll away with the page */
 .site-header {
@@ -28,33 +36,35 @@ Page layout, mobile first.
 }
 
 /*
-Hero, after the onboarding's Welcome step: logo, title and subtitle centered in the viewport.
-Sizes start at the app's values (logo 90px, title 32px, 30px from logo to title) up to 768px wide, then grow linearly
-to 1.5 times those values at 1920px. The subtitle grows from 18px to 24px, slightly above the app's 16px, in the
-darker strong brand color for contrast (decision D4).
+Hero, after the onboarding's Welcome step: logo, title and subtitle centered in the first screen, the scroll cue at
+its bottom edge. Sizes start at the app's values (logo 90px, title 32px, 30px from logo to title) up to 768px wide,
+then grow linearly to 1.5 times those values at 1920px. The subtitle grows from 18px to 24px, slightly above the app's
+16px, in the darker strong brand color for contrast (decision D4).
 */
 .hero {
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     min-height: 100vh;
     min-height: 100svh;
 
-    /* vertical padding keeps the content clear of the header and centered */
-    padding: 5rem var(--spacing-lg);
+    /* the top padding keeps the content clear of the header */
+    padding: 5rem var(--spacing-lg) var(--spacing-lg);
     text-align: center;
 }
 
 .hero-content {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .hero-logo {
     height: clamp(5.625rem, 3.75rem + 3.906vw, 8.4375rem);
     width: auto;
     margin-bottom: clamp(1.875rem, 1.25rem + 1.302vw, 2.8125rem);
-    fill: currentColor;
 }
 
 .hero-title {
@@ -68,7 +78,18 @@ darker strong brand color for contrast (decision D4).
     text-wrap: balance;
 }
 
-/* Entry animation: the items fade in and rise once, one after another */
+/* Scroll cue: a round arrow button at the bottom of the hero, a link to the download section */
+.scroll-cue.button {
+    margin-top: var(--spacing-xl);
+    padding: 0.75rem;
+}
+
+.scroll-cue .icon {
+    width: var(--icon-size-sm);
+    height: var(--icon-size-sm);
+}
+
+/* Entry animation: the items fade in and rise once, one after another; the scroll cue comes last */
 @keyframes hero-enter {
     from {
         opacity: 0;
@@ -83,7 +104,8 @@ darker strong brand color for contrast (decision D4).
     }
 }
 
-.hero-content > * {
+.hero-content > *,
+.scroll-cue {
     animation: hero-enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
@@ -95,22 +117,122 @@ darker strong brand color for contrast (decision D4).
     animation-delay: 240ms;
 }
 
+.scroll-cue {
+    animation-delay: 700ms;
+}
+
 /* wait for the translation, so Hungarian visitors see the animation in Hungarian */
-html.i18n-pending .hero-content > * {
+html.i18n-pending .hero-content > *,
+html.i18n-pending .scroll-cue {
     animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .hero-content > * {
+    .hero-content > *,
+    .scroll-cue {
         animation-name: hero-fade;
     }
 }
 
-/* Footer */
+/*
+Download. Together with the footer it fills at least one screen, content centered, so the arrow button lands on a
+screen of its own. The section is a size container: the platform cards go side by side when the section itself is
+wide enough, not just the window.
+*/
+.download {
+    container: download / inline-size;
+    display: grid;
+    align-content: center;
+    gap: var(--spacing-sm);
+    max-width: 60rem;
+    min-height: calc(100vh - var(--footer-height));
+    min-height: calc(100svh - var(--footer-height));
+    margin: 0 auto;
+    padding: var(--spacing-xxl) var(--spacing-lg);
+}
+
+.download-header {
+    margin-bottom: var(--spacing-xs);
+    text-align: center;
+}
+
+.download-release {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.125rem 0.5rem;
+    margin-top: var(--spacing-xxs);
+}
+
+.download-platforms {
+    display: grid;
+    gap: var(--spacing-sm);
+}
+
+@container download (min-width: 34rem) {
+    .download-platforms {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.platform {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.platform-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.platform-title .icon {
+    width: var(--icon-size-lg);
+    height: var(--icon-size-lg);
+}
+
+/* side by side while both fit, otherwise each on its own full-width row */
+.platform-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+}
+
+.platform-buttons .button {
+    flex: 1 1 auto;
+}
+
+.download-note {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+.download-note .icon {
+    width: var(--icon-size-md);
+    height: var(--icon-size-md);
+}
+
+/* on the page background: the foreground color keeps AA contrast (subtle and muted don't) */
+.download-platforms-note {
+    text-align: center;
+}
+
+/* Footer: "Made with" and the copyright, at least as tall as the space the download section leaves for it */
+:root {
+    --footer-height: 5rem;
+}
+
 .site-footer {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    padding: var(--spacing-xl) var(--spacing-lg);
+    gap: 0.125rem;
+    min-height: var(--footer-height);
+    padding: var(--spacing-xs) var(--spacing-lg) 1.25rem;
     text-align: center;
 }
 

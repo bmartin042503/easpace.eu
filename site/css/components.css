@@ -15,10 +15,15 @@ Components ported from the desktop app's Design/Styles, with the same class name
     overflow: hidden;
 }
 
-.icon {
+/*
+Icons have fixed sizes: the reset's max-width: 100% would collapse them inside content-sized buttons.
+Scoped to svg, because "icon" is also the app's class for round icon buttons (class="button secondary icon").
+*/
+svg.icon {
     flex: none;
     width: var(--icon-size-xs);
     height: var(--icon-size-xs);
+    max-width: none;
     fill: currentColor;
 }
 
@@ -84,4 +89,75 @@ Built from native radio inputs: one tab stop, arrow keys move the selection. Mar
     .segmented .segment {
         padding: 0.5rem 0.75rem;
     }
+}
+
+/*
+Buttons (Button.axaml): "button" plus the app's classes, e.g. class="button primary regular". Links styled as buttons
+use the same classes.
+*/
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xxs);
+    border: 0;
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.button.regular {
+    padding: 0.375rem 0.75rem;
+    border-radius: var(--radius-xs);
+}
+
+.button.primary {
+    background: var(--sem-gradient-brand);
+    color: var(--sem-on-brand);
+}
+
+.button.primary:hover,
+.button.primary:active {
+    background: var(--sem-gradient-brand-hover);
+}
+
+/* the 1px border is an inset shadow, so secondary buttons are as tall as primary ones next to them */
+.button.secondary {
+    background-color: var(--sem-surface-brand);
+    box-shadow: inset 0 0 0 var(--border-thickness) var(--sem-brand-strong);
+    color: var(--sem-brand-strong);
+}
+
+.button.secondary:hover,
+.button.secondary:active {
+    background-color: var(--sem-surface-brand-hover);
+    color: var(--sem-brand-strong-hover);
+}
+
+/* round icon button */
+.button.icon {
+    padding: 0.5rem;
+    border-radius: var(--radius-circular);
+}
+
+/* Cards (Border.axaml) */
+.card {
+    padding: 1.125rem;
+    border: var(--border-thickness) solid var(--sem-border-card);
+    border-radius: var(--radius-md);
+    background-color: var(--sem-surface-card);
+}
+
+.elevated.card {
+    border-color: var(--sem-border-card-elevated);
+    background-color: var(--sem-surface-elevated);
+}
+
+/* strong danger text: the plain danger color doesn't reach AA contrast on this background */
+.danger.card {
+    border-color: var(--sem-danger);
+    background: var(--sem-gradient-danger-subtle);
+    color: var(--sem-danger-strong);
 }

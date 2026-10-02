@@ -106,6 +106,16 @@ body {
     outline-offset: 2px;
 }
 
+/* Links: the app's strong brand color, which keeps AA contrast on the page background and on cards */
+a {
+    color: var(--sem-brand-strong);
+    text-underline-offset: 0.15em;
+}
+
+a:hover {
+    color: var(--sem-brand-strong-hover);
+}
+
 /* Utilities */
 
 /* text for screen readers only */

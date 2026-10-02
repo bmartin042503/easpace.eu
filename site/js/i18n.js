@@ -54,10 +54,31 @@ function applyLanguage(language) {
         }
     }
 
+    formatValues(language);
+
     root.lang = language;
 
     // the head script hides the page for non-English visitors until this point
     root.classList.remove("i18n-pending");
+}
+
+/**
+ * Formats dates (time[datetime]) and file sizes (data.file-size, in bytes) for the language:
+ * "September 20, 2026" / "2026. szeptember 20.", "49.8 MB" / "49,8 MB".
+ * @param {string} language "en" or "hu".
+ */
+function formatValues(language) {
+    // dates are calendar days; formatting them in UTC keeps visitors west of UTC from seeing the previous day
+    const dateFormat = new Intl.DateTimeFormat(language, { dateStyle: "long", timeZone: "UTC" });
+    const sizeFormat = new Intl.NumberFormat(language, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+
+    for (const time of document.querySelectorAll("time[datetime]")) {
+        time.textContent = dateFormat.format(new Date(time.dateTime));
+    }
+
+    for (const size of document.querySelectorAll("data.file-size")) {
+        size.textContent = `${sizeFormat.format(size.value / 1e6)} MB`;
+    }
 }
 
 function storeLanguage(language) {
