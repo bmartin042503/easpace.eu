@@ -92,6 +92,18 @@ then grow linearly to 1.5 times those values at 1920px. The subtitle grows from 
     text-wrap: balance;
 }
 
+/*
+Actions below the subtitle, where the onboarding has "Get Started": the app places it 128px under the text, here the
+distance grows from 40px on phones to 128px on wide screens. The buttons wrap on narrow screens.
+*/
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    margin-top: clamp(2.5rem, 1rem + 5vw, 8rem);
+}
+
 /* Scroll cue: a round arrow button at the bottom of the hero, a link to the download section */
 .scroll-cue.button {
     position: absolute;
@@ -134,6 +146,10 @@ then grow linearly to 1.5 times those values at 1920px. The subtitle grows from 
 
 .hero-content > :nth-child(3) {
     animation-delay: 240ms;
+}
+
+.hero-content > :nth-child(4) {
+    animation-delay: 360ms;
 }
 
 .scroll-cue {

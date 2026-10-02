@@ -15,6 +15,8 @@ export default {
     "Header.Appearance.Dark": "Sötét",
 
     "Hero.Text.Subtitle": "Egy biztonságos hely a gondolataidnak.",
+    "Hero.Actions.Download": "Letöltés",
+    "Hero.Actions.GitHub": "Megtekintés a GitHubon",
     "Hero.ScrollCue.Label": "Ugrás a letöltésekhez",
 
     "Download.Section.Title": "Letöltés",

@@ -113,6 +113,13 @@ use the same classes.
     border-radius: var(--radius-xs);
 }
 
+/* touch screens: at least 44px tall, so the buttons are easy to hit */
+@media (pointer: coarse) {
+    .button.regular {
+        min-height: 2.75rem;
+    }
+}
+
 .button.primary {
     background: var(--sem-gradient-brand);
     color: var(--sem-on-brand);
