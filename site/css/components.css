@@ -157,7 +157,6 @@ use the same classes.
 
 /* strong danger text: the plain danger color doesn't reach AA contrast on this background */
 .danger.card {
-    border-color: var(--sem-danger);
     background: var(--sem-gradient-danger-subtle);
     color: var(--sem-danger-strong);
 }

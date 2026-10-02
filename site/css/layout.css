@@ -15,13 +15,16 @@ below. A round arrow button at the bottom of the hero shows that the page contin
     }
 }
 
-/* Header: the switches sit top right over the hero and scroll away with the page */
+/*
+Header: the switches stay at the top right while the page scrolls. Once the page is scrolled (header.js), the header
+gets a translucent page-colored background, so content passing underneath doesn't clash with the switches.
+*/
 .site-header {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     left: 0;
-    z-index: 1;
+    z-index: 10;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
@@ -35,6 +38,13 @@ below. A round arrow button at the bottom of the hero shows that the page contin
     }
 }
 
+.site-header.is-scrolled {
+    background-color: color-mix(in srgb, var(--sem-background-blobs) 85%, transparent);
+    -webkit-backdrop-filter: blur(0.75rem);
+    backdrop-filter: blur(0.75rem);
+    box-shadow: 0 var(--border-thickness) 0 var(--sem-border-divider);
+}
+
 /*
 Hero, after the onboarding's Welcome step: logo, title and subtitle centered in the first screen, the scroll cue at
 its bottom edge. Sizes start at the app's values (logo 90px, title 32px, 30px from logo to title) up to 768px wide,
@@ -42,14 +52,18 @@ then grow linearly to 1.5 times those values at 1920px. The subtitle grows from 
 16px, in the darker strong brand color for contrast (decision D4).
 */
 .hero {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
     min-height: 100svh;
 
-    /* the top padding keeps the content clear of the header */
-    padding: 5rem var(--spacing-lg) var(--spacing-lg);
+    /*
+    equal top and bottom padding center the content in the screen: the top keeps it clear of the header, the bottom
+    holds the arrow button
+    */
+    padding: 5rem var(--spacing-lg);
     text-align: center;
 }
 
@@ -80,7 +94,12 @@ then grow linearly to 1.5 times those values at 1920px. The subtitle grows from 
 
 /* Scroll cue: a round arrow button at the bottom of the hero, a link to the download section */
 .scroll-cue.button {
-    margin-top: var(--spacing-xl);
+    position: absolute;
+    right: 0;
+    bottom: var(--spacing-lg);
+    left: 0;
+    width: fit-content;
+    margin: 0 auto;
     padding: 0.75rem;
 }
 
@@ -148,7 +167,9 @@ wide enough, not just the window.
     min-height: calc(100vh - var(--footer-height));
     min-height: calc(100svh - var(--footer-height));
     margin: 0 auto;
-    padding: var(--spacing-xxl) var(--spacing-lg);
+
+    /* the top padding keeps the heading clear of the fixed header after the arrow button's jump */
+    padding: 5.5rem var(--spacing-lg) var(--spacing-xxl);
 }
 
 .download-header {
@@ -203,21 +224,31 @@ wide enough, not just the window.
     flex: 1 1 auto;
 }
 
-.download-note {
-    display: flex;
-    align-items: flex-start;
+/* Before you install: a heading and the notes as a bulleted list with brand-colored bullets */
+.install-notes {
+    display: grid;
     gap: var(--spacing-xs);
-    padding: var(--spacing-xs) var(--spacing-sm);
 }
 
-.download-note .icon {
-    width: var(--icon-size-md);
-    height: var(--icon-size-md);
+.install-notes-list {
+    display: grid;
+    gap: var(--spacing-xs);
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.install-notes-list li {
+    padding-left: 0.25rem;
+}
+
+.install-notes-list li::marker {
+    color: var(--sem-brand-strong);
 }
 
 /* on the page background: the foreground color keeps AA contrast (subtle and muted don't) */
 .download-platforms-note {
     text-align: center;
+    text-wrap: balance;
 }
 
 /* Footer: "Made with" and the copyright, at least as tall as the space the download section leaves for it */

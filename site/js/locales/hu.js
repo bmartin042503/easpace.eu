@@ -23,10 +23,10 @@ export default {
     "Download.Button.Download": "Letöltés",
     "Download.Windows.SmartScreenNote": "A telepítő nincs megbízható tanúsítvánnyal aláírva, ezért a Windows SmartScreen figyelmeztetést jeleníthet meg. Kattints a „További információ” linkre, majd a „Futtatás mindenképp” gombra.",
     "Download.Mac.InstallNote": "Az Apple által aláírva és hitelesítve. Nyisd meg a .dmg fájlt, és húzd az easpace-t az Alkalmazások mappába. A macOS hozzáférést kérhet a Kulcskarikához, ahol az easpace a titkosítási kulcsát tárolja.",
+    "Download.Notes.Title": "Telepítés előtt",
     "Download.Git.Requirement": "Ehhez a verzióhoz telepített Git szükséges. A következő kiadásban ez a követelmény megszűnik.",
     "Download.Git.Link": "Git letöltése",
-    "Download.Stability.Title": "Még fejlesztés alatt.",
-    "Download.Stability.Description": "Előfordulhatnak hibák, és az adatvesztés sem zárható ki, ezért készíts biztonsági mentést a fontos adataidról.",
+    "Download.Stability.Note": "Az easpace még fejlesztés alatt áll: előfordulhatnak hibák, és az adatvesztés sem zárható ki, ezért készíts biztonsági mentést a fontos adataidról.",
     "Download.Platforms.Note": "Tesztelve Windows 11 (x64 és ARM64) rendszeren és Apple Silicon processzoros Maceken. Linux, iOS és Android verzió is tervben van.",
 
     "Footer.Text.Copyright": "Copyright © 2025-2026 Bartos Martin • MIT Licenc"

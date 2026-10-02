@@ -80,6 +80,7 @@ Licensed under the MIT License. See LICENSE file for details.
     <link rel="modulepreload" href="js/i18n.js">
     <link rel="modulepreload" href="js/locales/hu.js">
     <link rel="modulepreload" href="js/theme.js">
+    <link rel="modulepreload" href="js/header.js">
 </head>
 <body>
     <!-- Icons: Phosphor Icons (https://phosphoricons.com), MIT License, Copyright (c) 2023 Phosphor Icons -->
@@ -108,12 +109,6 @@ Licensed under the MIT License. See LICENSE file for details.
         </symbol>
         <symbol id="icon-caret-down" viewBox="0 0 256 256">
             <path d="M216.49,104.49l-80,80a12,12,0,0,1-17,0l-80-80a12,12,0,0,1,17-17L128,159l71.51-71.52a12,12,0,0,1,17,17Z" />
-        </symbol>
-        <symbol id="icon-info" viewBox="0 0 256 256">
-            <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm-4,48a12,12,0,1,1-12,12A12,12,0,0,1,124,72Zm12,112a16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40a8,8,0,0,1,0,16Z" />
-        </symbol>
-        <symbol id="icon-warning" viewBox="0 0 256 256">
-            <path d="M236.8,188.09,149.35,36.22h0a24.76,24.76,0,0,0-42.7,0L19.2,188.09a23.51,23.51,0,0,0,0,23.72A24.35,24.35,0,0,0,40.55,224h174.9a24.35,24.35,0,0,0,21.33-12.19A23.51,23.51,0,0,0,236.8,188.09ZM120,104a8,8,0,0,1,16,0v40a8,8,0,0,1-16,0Zm8,88a12,12,0,1,1,12-12A12,12,0,0,1,128,192Z" />
         </symbol>
     </svg>
 
@@ -266,22 +261,20 @@ Licensed under the MIT License. See LICENSE file for details.
                 </article>
             </div>
 
-            <!-- Git requirement of the current release (README: removed in the next release); elevated for link contrast -->
-            <div class="download-note elevated card neutral fs5">
-                <svg class="icon strong brand" aria-hidden="true"><use href="#icon-info"></use></svg>
-                <p>
-                    <span data-i18n="Download.Git.Requirement">This version needs Git to be installed. The next release removes this requirement.</span>
-                    <a href="https://git-scm.com/install/" data-i18n="Download.Git.Link">Download Git</a>
-                </p>
-            </div>
+            <!-- Notes before installing, as a list in one calm card: the Git requirement and the app's stability -->
+            <div class="install-notes elevated card neutral fs5">
+                <h3 class="fs4 medium" data-i18n="Download.Notes.Title">Before you install</h3>
 
-            <!-- Stability notice: the app is still in development, so bugs and data loss are possible -->
-            <div class="download-note danger card fs5">
-                <svg class="icon" aria-hidden="true"><use href="#icon-warning"></use></svg>
-                <p>
-                    <strong class="medium" data-i18n="Download.Stability.Title">Still in development.</strong>
-                    <span data-i18n="Download.Stability.Description">You may run into bugs, and data loss can’t be ruled out, so keep backups of important data.</span>
-                </p>
+                <ul class="install-notes-list">
+                    <!-- Git requirement of the current release (README: removed in the next release) -->
+                    <li>
+                        <span data-i18n="Download.Git.Requirement">This version needs Git to be installed. The next release removes this requirement.</span>
+                        <a href="https://git-scm.com/install/" data-i18n="Download.Git.Link">Download Git</a>
+                    </li>
+
+                    <!-- the app is still in development, so bugs and data loss are possible -->
+                    <li data-i18n="Download.Stability.Note">easpace is still in development: you may run into bugs, and data loss can’t be ruled out, so keep backups of important data.</li>
+                </ul>
             </div>
 
             <p class="download-platforms-note neutral fs5" data-i18n="Download.Platforms.Note">Tested on Windows 11 (x64 and ARM64) and on Macs with Apple Silicon. Linux, iOS and Android versions are planned.</p>
