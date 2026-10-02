@@ -1,0 +1,28 @@
+/*
+Copyright (c) 2026 Martin Bartos
+Licensed under the MIT License. See LICENSE file for details.
+*/
+
+/*
+Page layout, mobile first.
+*/
+
+/* Header: the switches sit top right over the hero and scroll away with the page */
+.site-header {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs);
+}
+
+@media (min-width: 48rem) {
+    .site-header {
+        padding: var(--spacing-sm) var(--spacing-lg);
+    }
+}

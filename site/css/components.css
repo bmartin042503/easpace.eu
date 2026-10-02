@@ -1,0 +1,87 @@
+/*
+Copyright (c) 2026 Martin Bartos
+Licensed under the MIT License. See LICENSE file for details.
+*/
+
+/*
+Components ported from the desktop app's Design/Styles, with the same class names.
+*/
+
+/* Icons: inline SVG symbols from the sprite at the top of <body>, colored by the text color */
+.icon-sprite {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.icon {
+    flex: none;
+    width: var(--icon-size-xs);
+    height: var(--icon-size-xs);
+    fill: currentColor;
+}
+
+/*
+Segmented control (ListBox.segmented and its items in ListBox.axaml and ListBoxItem.axaml).
+Built from native radio inputs: one tab stop, arrow keys move the selection. Markup:
+<div class="segmented" role="radiogroup"><label><input type="radio"><span class="segment">…</span></label>…</div>
+*/
+.segmented {
+    display: inline-flex;
+    gap: var(--spacing-xxs);
+    padding: var(--spacing-xxs);
+    border: var(--border-thickness) solid var(--sem-border);
+    border-radius: var(--radius-sm);
+    background-color: var(--sem-surface-elevated);
+}
+
+.segmented label {
+    position: relative;
+    display: flex;
+    cursor: pointer;
+}
+
+/* the input stays focusable and in the accessibility tree; the visible part is the segment */
+.segmented input {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.segmented .segment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xxs);
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-xs);
+    font-size: var(--font-size-xs);
+    line-height: var(--icon-size-xs);
+    color: var(--sem-foreground);
+}
+
+@media (hover: hover) {
+    .segmented label:hover .segment {
+        background-color: var(--sem-surface-brand);
+    }
+}
+
+.segmented input:checked + .segment {
+    background-color: var(--sem-brand);
+    color: var(--sem-on-brand);
+}
+
+.segmented input:focus-visible + .segment {
+    outline: var(--border-thickness-thick) solid var(--sem-border-focus);
+    outline-offset: 2px;
+}
+
+/* larger hit areas for touch: 32 × 40 px instead of 32 × 24 px */
+@media (pointer: coarse) {
+    .segmented .segment {
+        padding: 0.5rem 0.75rem;
+    }
+}

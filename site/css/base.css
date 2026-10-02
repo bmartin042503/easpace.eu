@@ -106,6 +106,26 @@ body {
     outline-offset: 2px;
 }
 
+/* Utilities */
+
+/* text for screen readers only */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* controls that can't work without JS; the head script adds the "js" class */
+html:not(.js) .js-only {
+    display: none;
+}
+
 /* Foreground */
 .neutral {
     color: var(--sem-foreground);
