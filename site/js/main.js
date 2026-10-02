@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE file for details.
 
 // module entry point; modules run after the document is parsed, so the markup is available here
+import { initBlobs } from "./blobs.js";
 import { initHeader } from "./header.js";
 import { initI18n } from "./i18n.js";
 import { initTheme } from "./theme.js";
@@ -10,3 +11,4 @@ import { initTheme } from "./theme.js";
 initI18n();
 initTheme();
 initHeader();
+initBlobs();

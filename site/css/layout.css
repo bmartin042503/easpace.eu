@@ -16,6 +16,28 @@ below. A round arrow button at the bottom of the hero shows that the page contin
 }
 
 /*
+Blob background (blobs.js): a fixed canvas behind all content, as tall as the largest viewport, so mobile toolbars
+coming and going don't resize it. Its opacity of 0.25 is the app's control opacity; it fades in once the first frame
+is drawn, and without JS the page simply shows its background color.
+*/
+.blobs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100vh;
+    height: 100lvh;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1.2s ease-out;
+}
+
+.blobs.is-visible {
+    opacity: 0.25;
+}
+
+/*
 Header: the switches stay at the top right while the page scrolls. Once the page is scrolled (header.js), the header
 gets a translucent page-colored background, so content passing underneath doesn't clash with the switches.
 */
@@ -42,7 +64,6 @@ gets a translucent page-colored background, so content passing underneath doesn'
     background-color: color-mix(in srgb, var(--sem-background-blobs) 85%, transparent);
     -webkit-backdrop-filter: blur(0.75rem);
     backdrop-filter: blur(0.75rem);
-    box-shadow: 0 var(--border-thickness) 0 var(--sem-border-divider);
 }
 
 /*
