@@ -91,6 +91,12 @@ body {
 
     /* Poppins' own line spacing: (ascender 1050 + descender 350 + line gap 100) / 1000, as in the app */
     line-height: 1.5;
+
+    /*
+    a word longer than its line breaks instead of widening the page (very large text on a phone); "anywhere" also lets
+    grids and flex rows shrink below such a word
+    */
+    overflow-wrap: anywhere;
     color: var(--sem-foreground);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

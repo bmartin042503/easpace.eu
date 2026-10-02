@@ -39,7 +39,7 @@ is drawn, and without JS the page simply shows its background color.
 
 /*
 Header: the switches stay at the top right while the page scrolls. Once the page is scrolled (header.js), the header
-gets a translucent page-colored background, so content passing underneath doesn't clash with the switches.
+fades in a translucent page-colored background, so content passing underneath doesn't clash with the switches.
 */
 .site-header {
     position: fixed;
@@ -60,10 +60,29 @@ gets a translucent page-colored background, so content passing underneath doesn'
     }
 }
 
-.site-header.is-scrolled {
+/*
+the background is a layer behind the switches that only fades its opacity, so it appears and disappears smoothly
+while theme changes stay instant, as in the app
+*/
+.site-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
     background-color: color-mix(in srgb, var(--sem-background-blobs) 85%, transparent);
     -webkit-backdrop-filter: blur(0.75rem);
     backdrop-filter: blur(0.75rem);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.site-header.is-scrolled::before {
+    opacity: 1;
+}
+
+/* a header taller than a fifth of the screen (very large text on a phone) scrolls away instead (header.js) */
+.site-header.is-tall {
+    position: absolute;
 }
 
 /*
@@ -81,10 +100,10 @@ then grow linearly to 1.5 times those values at 1920px. The subtitle grows from 
     min-height: 100svh;
 
     /*
-    equal top and bottom padding center the content in the screen: the top keeps it clear of the header, the bottom
-    holds the arrow button
+    equal top and bottom padding center the content in the screen: the top keeps it clear of the header (and grows
+    with a taller one, e.g. with very large text), the bottom holds the arrow button
     */
-    padding: 5rem var(--spacing-lg);
+    padding: max(5rem, var(--header-height, 0px) + var(--spacing-xxs)) var(--spacing-xs) 5rem;
     text-align: center;
 }
 
@@ -198,6 +217,9 @@ wide enough, not just the window.
 .download {
     container: download / inline-size;
     display: grid;
+
+    /* the column may shrink below its content's width, so the section always fits the screen */
+    grid-template-columns: minmax(0, 1fr);
     align-content: center;
     gap: var(--spacing-sm);
     max-width: 60rem;
@@ -206,7 +228,7 @@ wide enough, not just the window.
     margin: 0 auto;
 
     /* the top padding keeps the heading clear of the fixed header after the arrow button's jump */
-    padding: 5.5rem var(--spacing-lg) var(--spacing-xxl);
+    padding: max(5.5rem, var(--header-height, 0px) + var(--spacing-lg)) var(--spacing-lg) var(--spacing-xxl);
 }
 
 .download-header {
@@ -224,12 +246,13 @@ wide enough, not just the window.
 
 .download-platforms {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--spacing-sm);
 }
 
 @container download (min-width: 34rem) {
     .download-platforms {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 

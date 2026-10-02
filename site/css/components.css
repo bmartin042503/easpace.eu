@@ -95,8 +95,10 @@ Built from native radio inputs: one tab stop, arrow keys move the selection. Mar
 Buttons (Button.axaml): "button" plus the app's classes, e.g. class="button primary regular". Links styled as buttons
 use the same classes.
 */
+/* the content wraps only when the button can't fit it on one line (very large text) */
 .button {
     display: inline-flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: var(--spacing-xxs);
