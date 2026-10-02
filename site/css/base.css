@@ -1,0 +1,206 @@
+/*
+Copyright (c) 2026 Martin Bartos
+Licensed under the MIT License. See LICENSE file for details.
+*/
+
+/*
+Fonts, a small reset, page defaults and the text classes of the desktop app's Design/Styles/TextBlock.axaml.
+Class naming as in the app: {color} {intensity} {size} {weight}, e.g. "subtle neutral fs5 medium".
+*/
+
+/* Poppins 4.004 from the app, subset to Latin, Latin Extended-A and General Punctuation (OFL, see fonts/OFL.txt) */
+@font-face {
+    font-family: "Poppins";
+    src: url("../fonts/poppins-300.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url("../fonts/poppins-400.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url("../fonts/poppins-500.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url("../fonts/poppins-700.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body,
+h1, h2, h3, h4, h5, h6,
+p,
+ul, ol,
+figure {
+    margin: 0;
+}
+
+/* headings take their size and weight from the text classes, as every TextBlock does in the app */
+h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+img,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+button,
+input {
+    font: inherit;
+    color: inherit;
+}
+
+/* Page */
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+
+    /* the whole site sits on onboarding's blob background */
+    background-color: var(--sem-background-blobs);
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-regular);
+
+    /* Poppins' own line spacing: (ascender 1050 + descender 350 + line gap 100) / 1000, as in the app */
+    line-height: 1.5;
+    color: var(--sem-foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+    background-color: var(--sem-brand);
+    color: var(--sem-on-brand);
+}
+
+:focus-visible {
+    outline: var(--border-thickness-thick) solid var(--sem-border-focus);
+    outline-offset: 2px;
+}
+
+/* Foreground */
+.neutral {
+    color: var(--sem-foreground);
+}
+
+.subtle.neutral {
+    color: var(--sem-foreground-subtle);
+}
+
+.muted.neutral {
+    color: var(--sem-foreground-muted);
+}
+
+.brand {
+    color: var(--sem-brand);
+}
+
+.strong.brand {
+    color: var(--sem-brand-strong);
+}
+
+.subtle.brand {
+    color: var(--sem-brand-subtle);
+}
+
+.danger {
+    color: var(--sem-danger);
+}
+
+.strong.danger {
+    color: var(--sem-danger-strong);
+}
+
+.success {
+    color: var(--sem-success);
+}
+
+.strong.success {
+    color: var(--sem-success-strong);
+}
+
+.info {
+    color: var(--sem-info);
+}
+
+.strong.info {
+    color: var(--sem-info-strong);
+}
+
+.warning {
+    color: var(--sem-warning);
+}
+
+.strong.warning {
+    color: var(--sem-warning-strong);
+}
+
+/* Font size */
+.fs1 {
+    font-size: var(--font-size-xxl);
+}
+
+.fs2 {
+    font-size: var(--font-size-xl);
+}
+
+.fs3 {
+    font-size: var(--font-size-lg);
+}
+
+.fs4 {
+    font-size: var(--font-size-md);
+}
+
+.fs5 {
+    font-size: var(--font-size-sm);
+}
+
+.fs6 {
+    font-size: var(--font-size-xs);
+}
+
+/* Font weight; no semibold, as there's no 600 font file and the browser would show 700 */
+.light {
+    font-weight: var(--font-weight-light);
+}
+
+.regular {
+    font-weight: var(--font-weight-regular);
+}
+
+.medium {
+    font-weight: var(--font-weight-medium);
+}
+
+.bold {
+    font-weight: var(--font-weight-bold);
+}
