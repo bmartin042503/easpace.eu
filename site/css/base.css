@@ -126,6 +126,11 @@ html:not(.js) .js-only {
     display: none;
 }
 
+/* the English page stays hidden until i18n.js has translated it (the head script sets and times out the class) */
+html.i18n-pending body {
+    visibility: hidden;
+}
+
 /* Foreground */
 .neutral {
     color: var(--sem-foreground);

@@ -8,30 +8,66 @@ Licensed under the MIT License. See LICENSE file for details.
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Theme before the first paint: the stored appearance (the app's preference key), else the OS preference -->
+    <!--
+    Theme and language before the first paint, from the stored choices (the app's preference keys), else from the OS
+    and browser preferences
+    -->
     <script>
         (function () {
             var root = document.documentElement;
             var appearance = "system";
+            var language = null;
 
             root.classList.add("js");
 
             try {
-                var stored = localStorage.getItem("color-scheme-appearance");
-                if (stored === "light" || stored === "dark" || stored === "system") appearance = stored;
+                var storedAppearance = localStorage.getItem("color-scheme-appearance");
+                if (storedAppearance === "light" || storedAppearance === "dark" || storedAppearance === "system") {
+                    appearance = storedAppearance;
+                }
+
+                var storedLanguage = localStorage.getItem("language");
+                if (storedLanguage === "en" || storedLanguage === "hu") language = storedLanguage;
             } catch (e) {
-                // storage blocked: follow the OS
+                // storage blocked: follow the OS and browser preferences
             }
 
             var dark = appearance === "dark"
                 || (appearance === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
 
             root.dataset.theme = dark ? "dark" : "light";
+
+            // the first browser language that the site has, as the app does with the OS language
+            if (!language) {
+                var preferred = navigator.languages && navigator.languages.length
+                    ? navigator.languages
+                    : [navigator.language || "en"];
+
+                language = "en";
+
+                for (var i = 0; i < preferred.length; i++) {
+                    var primary = String(preferred[i]).toLowerCase().split("-")[0];
+                    if (primary === "hu" || primary === "en") {
+                        language = primary;
+                        break;
+                    }
+                }
+            }
+
+            root.lang = language;
+
+            // the page is written in English; hide it until the translation is applied, at most for a second
+            if (language !== "en") {
+                root.classList.add("i18n-pending");
+                setTimeout(function () {
+                    root.classList.remove("i18n-pending");
+                }, 1000);
+            }
         })();
     </script>
 
-    <title>easpace – A private space for your thoughts</title>
-    <meta name="description"
+    <title data-i18n="Meta.Page.Title">easpace – A private space for your thoughts</title>
+    <meta name="description" data-i18n-attr="content:Meta.Page.Description"
           content="easpace is a free, open-source app: a quiet, private space for self-reflection, personal tracking and wellbeing.">
     <meta name="theme-color" content="#daf4fd">
     <link rel="preload" href="fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -40,6 +76,10 @@ Licensed under the MIT License. See LICENSE file for details.
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/layout.css">
     <script type="module" src="js/main.js"></script>
+    <!-- fetch the imported modules right away instead of after main.js -->
+    <link rel="modulepreload" href="js/i18n.js">
+    <link rel="modulepreload" href="js/locales/hu.js">
+    <link rel="modulepreload" href="js/theme.js">
 </head>
 <body>
     <!-- Icons: Phosphor Icons (https://phosphoricons.com), MIT License, Copyright (c) 2023 Phosphor Icons -->
@@ -56,27 +96,47 @@ Licensed under the MIT License. See LICENSE file for details.
     </svg>
 
     <header class="site-header">
+        <!-- Language switch: endonyms as accessible names, as in the app, so they aren't translated -->
+        <div class="segmented js-only" role="radiogroup" aria-label="Language"
+             data-i18n-attr="aria-label:Header.Language.Label">
+            <label lang="en" title="English">
+                <input type="radio" name="language" value="en">
+                <span class="segment">
+                    <span aria-hidden="true">EN</span>
+                    <span class="visually-hidden">English</span>
+                </span>
+            </label>
+            <label lang="hu" title="Magyar">
+                <input type="radio" name="language" value="hu">
+                <span class="segment">
+                    <span aria-hidden="true">HU</span>
+                    <span class="visually-hidden">Magyar</span>
+                </span>
+            </label>
+        </div>
+
         <!-- Appearance switch (the app's System / Light / Dark setting) -->
-        <div class="segmented js-only" role="radiogroup" aria-label="Appearance">
-            <label title="System">
+        <div class="segmented js-only" role="radiogroup" aria-label="Appearance"
+             data-i18n-attr="aria-label:Header.Appearance.Label">
+            <label title="System" data-i18n-attr="title:Header.Appearance.System">
                 <input type="radio" name="appearance" value="system">
                 <span class="segment">
                     <svg class="icon" aria-hidden="true"><use href="#icon-circle-half"></use></svg>
-                    <span class="visually-hidden">System</span>
+                    <span class="visually-hidden" data-i18n="Header.Appearance.System">System</span>
                 </span>
             </label>
-            <label title="Light">
+            <label title="Light" data-i18n-attr="title:Header.Appearance.Light">
                 <input type="radio" name="appearance" value="light">
                 <span class="segment">
                     <svg class="icon" aria-hidden="true"><use href="#icon-sun"></use></svg>
-                    <span class="visually-hidden">Light</span>
+                    <span class="visually-hidden" data-i18n="Header.Appearance.Light">Light</span>
                 </span>
             </label>
-            <label title="Dark">
+            <label title="Dark" data-i18n-attr="title:Header.Appearance.Dark">
                 <input type="radio" name="appearance" value="dark">
                 <span class="segment">
                     <svg class="icon" aria-hidden="true"><use href="#icon-moon"></use></svg>
-                    <span class="visually-hidden">Dark</span>
+                    <span class="visually-hidden" data-i18n="Header.Appearance.Dark">Dark</span>
                 </span>
             </label>
         </div>
@@ -86,7 +146,7 @@ Licensed under the MIT License. See LICENSE file for details.
         <!-- Hero -->
         <section id="hero">
             <h1>easpace</h1>
-            <p>A private space for your thoughts.</p>
+            <p data-i18n="Hero.Text.Subtitle">A private space for your thoughts.</p>
         </section>
     </main>
 
