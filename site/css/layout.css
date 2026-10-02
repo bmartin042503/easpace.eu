@@ -26,3 +26,99 @@ Page layout, mobile first.
         padding: var(--spacing-sm) var(--spacing-lg);
     }
 }
+
+/*
+Hero, after the onboarding's Welcome step: logo, title and subtitle centered in the viewport.
+Sizes start at the app's values (logo 90px, title 32px, 30px from logo to title) up to 768px wide, then grow linearly
+to 1.5 times those values at 1920px. The subtitle grows from 18px to 24px, slightly above the app's 16px, in the
+darker strong brand color for contrast (decision D4).
+*/
+.hero {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    min-height: 100svh;
+
+    /* vertical padding keeps the content clear of the header and centered */
+    padding: 5rem var(--spacing-lg);
+    text-align: center;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-logo {
+    height: clamp(5.625rem, 3.75rem + 3.906vw, 8.4375rem);
+    width: auto;
+    margin-bottom: clamp(1.875rem, 1.25rem + 1.302vw, 2.8125rem);
+    fill: currentColor;
+}
+
+.hero-title {
+    font-size: clamp(2rem, 1.333rem + 1.389vw, 3rem);
+}
+
+/* one line while it fits the screen; when it has to wrap, balanced lines avoid a lone last word */
+.hero-subtitle {
+    margin-top: 0.25rem;
+    font-size: clamp(1.125rem, 0.875rem + 0.521vw, 1.5rem);
+    text-wrap: balance;
+}
+
+/* Entry animation: the items fade in and rise once, one after another */
+@keyframes hero-enter {
+    from {
+        opacity: 0;
+        transform: translateY(0.625rem);
+        filter: blur(0.375rem);
+    }
+}
+
+@keyframes hero-fade {
+    from {
+        opacity: 0;
+    }
+}
+
+.hero-content > * {
+    animation: hero-enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-content > :nth-child(2) {
+    animation-delay: 120ms;
+}
+
+.hero-content > :nth-child(3) {
+    animation-delay: 240ms;
+}
+
+/* wait for the translation, so Hungarian visitors see the animation in Hungarian */
+html.i18n-pending .hero-content > * {
+    animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-content > * {
+        animation-name: hero-fade;
+    }
+}
+
+/* Footer */
+.site-footer {
+    display: flex;
+    justify-content: center;
+    padding: var(--spacing-xl) var(--spacing-lg);
+    text-align: center;
+}
+
+/* "Made with ♥ from Hungary": text and heart in a row with 4px gaps, as in the app's credits */
+.made-with {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+}
