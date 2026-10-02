@@ -1,0 +1,295 @@
+/*
+Copyright (c) 2026 Martin Bartos
+Licensed under the MIT License. See LICENSE file for details.
+*/
+
+/*
+Design tokens ported 1:1 from the desktop app's Design folder (src/easpace.Desktop/Design):
+palette from ColorSchemes/HavenBlue.axaml, semantics from Semantics/Light.axaml and Dark.axaml, metrics from Metrics.
+Outside this file, colors are used only through the --sem-* tokens, as the app's views use only Sem.* resources.
+*/
+
+/* Haven Blue palette */
+:root {
+    /* Brand - (lightness: 72%; chroma: 0,116; hue: 221,08) */
+    --brand-25: #daf4fd; /* oklch(0.95 0.03 221.08) */
+    --brand-50: #baebfc; /* oklch(0.911 0.055 221.08) */
+    --brand-100: #99e2fb; /* oklch(0.873 0.08 221.08) */
+    --brand-200: #73d8f9; /* oklch(0.834 0.105 221.08) */
+    --brand-300: #41cef6; /* oklch(0.795 0.129 221.08) */
+    --brand-400: #3cc1e7; /* oklch(0.756 0.123 221.08) */
+    --brand-500: #39b4d7; /* oklch(0.718 0.116 221.08) */
+    --brand-600: #2f9ebd; /* oklch(0.651 0.106 221.08) */
+    --brand-700: #2788a3; /* oklch(0.584 0.095 221.08) */
+    --brand-800: #21738a; /* oklch(0.518 0.084 221.08) */
+    --brand-900: #195f72; /* oklch(0.451 0.073 221.08) */
+    --brand-950: #124b5b; /* oklch(0.384 0.062 221.08) */
+    --brand-975: #0b3845; /* oklch(0.318 0.052 221.08) */
+
+    /* Success - (lightness: 72%; chroma: 0,116; hue: 142,09) */
+    --success-25: #def7db; /* oklch(0.95 0.044 142.094) */
+    --success-50: #c3f1bd; /* oklch(0.912 0.084 142.094) */
+    --success-100: #a2eb9a; /* oklch(0.873 0.132 142.094) */
+    --success-200: #95df8d; /* oklch(0.835 0.134 142.094) */
+    --success-300: #8cd284; /* oklch(0.797 0.128 142.094) */
+    --success-400: #82c47b; /* oklch(0.758 0.122 142.094) */
+    --success-500: #79b773; /* oklch(0.72 0.116 142.094) */
+    --success-600: #6aa064; /* oklch(0.653 0.105 142.094) */
+    --success-700: #5b8b56; /* oklch(0.587 0.094 142.094) */
+    --success-800: #4c7548; /* oklch(0.52 0.083 142.094) */
+    --success-900: #3e603a; /* oklch(0.453 0.073 142.094) */
+    --success-950: #304d2d; /* oklch(0.387 0.062 142.094) */
+    --success-975: #233921; /* oklch(0.32 0.051 142.094) */
+
+    /* Warning - (lightness: 72%; chroma: 0,116; hue: 109,61) */
+    --warning-25: #f6f773; /* oklch(0.95 0.154 109.614) */
+    --warning-50: #e9ea6e; /* oklch(0.912 0.147 109.614) */
+    --warning-100: #dcdd67; /* oklch(0.873 0.141 109.614) */
+    --warning-200: #cfd060; /* oklch(0.835 0.135 109.614) */
+    --warning-300: #c2c45a; /* oklch(0.797 0.129 109.614) */
+    --warning-400: #b6b753; /* oklch(0.758 0.123 109.614) */
+    --warning-500: #aaab4e; /* oklch(0.72 0.116 109.614) */
+    --warning-600: #949543; /* oklch(0.653 0.106 109.614) */
+    --warning-700: #808139; /* oklch(0.587 0.095 109.614) */
+    --warning-800: #6c6d2f; /* oklch(0.52 0.084 109.614) */
+    --warning-900: #595926; /* oklch(0.453 0.073 109.614) */
+    --warning-950: #46471c; /* oklch(0.387 0.063 109.614) */
+    --warning-975: #353513; /* oklch(0.32 0.052 109.614) */
+
+    /* Danger - (lightness: 72%; chroma: 0,116; hue: 26,86) */
+    --danger-25: #faeae8; /* oklch(0.95 0.017 26.857) */
+    --danger-50: #f6dbd7; /* oklch(0.912 0.03 26.857) */
+    --danger-100: #f2cbc5; /* oklch(0.873 0.045 26.857) */
+    --danger-200: #eebab4; /* oklch(0.835 0.061 26.857) */
+    --danger-300: #ebaaa2; /* oklch(0.797 0.078 26.857) */
+    --danger-400: #e79990; /* oklch(0.758 0.096 26.857) */
+    --danger-500: #e4877d; /* oklch(0.72 0.116 26.857) */
+    --danger-600: #df655b; /* oklch(0.653 0.155 26.857) */
+    --danger-700: #c94e46; /* oklch(0.587 0.159 26.857) */
+    --danger-800: #ab413a; /* oklch(0.52 0.141 26.857) */
+    --danger-900: #8e342f; /* oklch(0.453 0.123 26.857) */
+    --danger-950: #722924; /* oklch(0.387 0.105 26.857) */
+    --danger-975: #571d19; /* oklch(0.32 0.087 26.857) */
+
+    /* Info - (lightness: 72%; chroma: 0,116; hue: 266,17) */
+    --info-25: #e8effc; /* oklch(0.95 0.019 266.17) */
+    --info-50: #d7e2f9; /* oklch(0.912 0.034 266.17) */
+    --info-100: #c6d5f7; /* oklch(0.873 0.05 266.17) */
+    --info-200: #b5c9f5; /* oklch(0.835 0.066 266.17) */
+    --info-300: #a4bcf2; /* oklch(0.797 0.082 266.17) */
+    --info-400: #93aff0; /* oklch(0.758 0.099 266.17) */
+    --info-500: #83a2ee; /* oklch(0.72 0.116 266.17) */
+    --info-600: #668bea; /* oklch(0.653 0.148 266.17) */
+    --info-700: #4a73e6; /* oklch(0.587 0.181 266.17) */
+    --info-800: #2f57e2; /* oklch(0.52 0.215 266.17) */
+    --info-900: #1936dc; /* oklch(0.453 0.248 266.17) */
+    --info-950: #132ab2; /* oklch(0.387 0.211 266.17) */
+    --info-975: #0c1e8a; /* oklch(0.32 0.175 266.17) */
+
+    /* Neutral - (lightness: 64%; chroma: 0,025; hue: 221,08) */
+    --neutral-25: #eaf0f2; /* oklch(0.95 0.007 221.08) */
+    --neutral-50: #d3e0e4; /* oklch(0.898 0.015 221.08) */
+    --neutral-100: #bdd1d7; /* oklch(0.847 0.023 221.08) */
+    --neutral-200: #a7c1ca; /* oklch(0.795 0.031 221.08) */
+    --neutral-300: #99b0b9; /* oklch(0.743 0.029 221.08) */
+    --neutral-400: #8aa0a8; /* oklch(0.692 0.027 221.08) */
+    --neutral-500: #7c9097; /* oklch(0.64 0.025 221.08) */
+    --neutral-600: #6a7c82; /* oklch(0.573 0.023 221.08) */
+    --neutral-700: #59686d; /* oklch(0.507 0.02 221.08) */
+    --neutral-800: #495559; /* oklch(0.44 0.017 221.08) */
+    --neutral-900: #384246; /* oklch(0.373 0.015 221.08) */
+    --neutral-950: #293134; /* oklch(0.307 0.012 221.08) */
+    --neutral-975: #1b2022; /* oklch(0.24 0.009 221.08) */
+}
+
+/*
+Semantic tokens. Brushes bound to Opacity.Page, Opacity.Sidebar or Opacity.Card are plain colors here, because
+those opacities are 1.0 without the app's translucency option, which the website doesn't have.
+*/
+
+/* Light */
+:root {
+    color-scheme: light;
+
+    /* Foreground and brand */
+    --sem-foreground: var(--neutral-900);
+    --sem-foreground-subtle: var(--neutral-700);
+    --sem-foreground-muted: var(--neutral-500);
+    --sem-brand: var(--brand-700);
+    --sem-brand-hover: var(--brand-800);
+    --sem-brand-subtle: var(--brand-500);
+    --sem-brand-strong: var(--brand-800);
+    --sem-brand-strong-hover: var(--brand-900);
+    --sem-on-brand: #ffffff;
+    --sem-success: var(--success-700);
+    --sem-success-strong: var(--success-800);
+    --sem-warning: var(--warning-700);
+    --sem-warning-strong: var(--warning-800);
+    --sem-danger: var(--danger-700);
+    --sem-danger-strong: var(--danger-800);
+    --sem-on-danger: #ffffff;
+    --sem-info: var(--info-700);
+    --sem-info-strong: var(--info-800);
+
+    /* Surfaces */
+    --sem-surface: var(--neutral-25);
+    --sem-surface-card: var(--neutral-50);
+    --sem-surface-elevated: #ffffff;
+    --sem-surface-elevated-hover: rgb(255 255 255 / 0.5);
+    --sem-surface-brand: var(--brand-25);
+    --sem-surface-brand-hover: var(--brand-50);
+    --sem-surface-success: var(--success-25);
+    --sem-surface-warning: var(--warning-25);
+    --sem-surface-danger: var(--danger-25);
+    --sem-surface-info: var(--info-25);
+    --sem-surface-blur-background: rgb(0 0 0 / 0.35);
+
+    /* Progress */
+    --sem-progress: var(--brand-700);
+    --sem-progress-track: var(--brand-100);
+
+    /* Borders */
+    --sem-border: var(--neutral-400);
+    --sem-border-subtle: var(--neutral-300);
+    --sem-border-brand: var(--brand-800);
+    --sem-border-brand-divider: var(--brand-900);
+    --sem-border-divider: var(--neutral-200);
+    --sem-border-input: var(--neutral-400);
+    --sem-border-card: var(--neutral-300);
+    --sem-border-card-elevated: var(--neutral-400);
+    --sem-border-focus: var(--brand-800);
+
+    /* Gradients */
+    --sem-gradient-brand: linear-gradient(to bottom, var(--brand-600), var(--brand-700));
+    --sem-gradient-brand-hover: linear-gradient(to bottom, var(--brand-700), var(--brand-800));
+    --sem-gradient-brand-subtle: linear-gradient(to bottom, var(--brand-50), var(--brand-25));
+
+    --sem-gradient-danger: linear-gradient(to bottom, var(--danger-600), var(--danger-700));
+    --sem-gradient-danger-hover: linear-gradient(to bottom, var(--danger-700), var(--danger-800));
+    --sem-gradient-danger-subtle: linear-gradient(to bottom, var(--danger-25), var(--danger-50));
+
+    /* Backgrounds */
+    --sem-background-page: var(--neutral-25);
+    --sem-background-sidebar: var(--neutral-50);
+    --sem-background-credits: var(--brand-25);
+    --sem-background-blobs: var(--brand-25);
+}
+
+/* Dark */
+:root[data-theme="dark"] {
+    color-scheme: dark;
+
+    /* Foreground and brand */
+    --sem-foreground: var(--neutral-50);
+    --sem-foreground-subtle: var(--neutral-200);
+    --sem-foreground-muted: var(--neutral-300);
+    --sem-brand: var(--brand-300);
+    --sem-brand-hover: var(--brand-400);
+    --sem-brand-subtle: var(--brand-400);
+    --sem-brand-strong: var(--brand-200);
+    --sem-brand-strong-hover: var(--brand-300);
+    --sem-on-brand: var(--neutral-975);
+    --sem-success: var(--success-300);
+    --sem-success-strong: var(--success-200);
+    --sem-warning: var(--warning-300);
+    --sem-warning-strong: var(--warning-200);
+    --sem-danger: var(--danger-300);
+    --sem-danger-strong: var(--danger-200);
+    --sem-on-danger: var(--neutral-975);
+    --sem-info: var(--info-300);
+    --sem-info-strong: var(--info-200);
+
+    /* Surfaces */
+    --sem-surface: var(--neutral-975);
+    --sem-surface-card: var(--neutral-950);
+    --sem-surface-elevated: var(--neutral-900);
+    --sem-surface-elevated-hover: var(--neutral-950);
+    --sem-surface-brand: var(--brand-975);
+    --sem-surface-brand-hover: var(--brand-950);
+    --sem-surface-success: var(--success-975);
+    --sem-surface-warning: var(--warning-975);
+    --sem-surface-danger: var(--danger-975);
+    --sem-surface-info: color-mix(in srgb, var(--info-975) 35%, transparent);
+    --sem-surface-blur-background: rgb(0 0 0 / 0.45);
+
+    /* Progress */
+    --sem-progress: var(--brand-300);
+    --sem-progress-track: var(--brand-975);
+
+    /* Borders */
+    --sem-border: var(--neutral-500);
+    --sem-border-subtle: var(--neutral-600);
+    --sem-border-brand: var(--brand-300);
+    --sem-border-brand-divider: var(--brand-900);
+    --sem-border-divider: var(--neutral-900);
+    --sem-border-input: var(--neutral-500);
+    --sem-border-card: var(--neutral-800);
+    --sem-border-card-elevated: var(--neutral-500);
+    --sem-border-focus: var(--brand-300);
+
+    /* Gradients */
+    --sem-gradient-brand: linear-gradient(to bottom, var(--brand-300), var(--brand-400));
+    --sem-gradient-brand-hover: linear-gradient(to bottom, var(--brand-400), var(--brand-500));
+    --sem-gradient-brand-subtle: linear-gradient(to bottom, var(--brand-950), var(--brand-975));
+
+    --sem-gradient-danger: linear-gradient(to bottom, var(--danger-300), var(--danger-400));
+    --sem-gradient-danger-hover: linear-gradient(to bottom, var(--danger-400), var(--danger-500));
+    --sem-gradient-danger-subtle: linear-gradient(to bottom, var(--danger-950), var(--danger-975));
+
+    /* Backgrounds */
+    --sem-background-page: var(--neutral-975);
+    --sem-background-sidebar: var(--neutral-950);
+    --sem-background-credits: var(--brand-975);
+    --sem-background-blobs: var(--brand-975);
+}
+
+/*
+Metrics. The app's DIP values are converted to rem (1rem = 16px at the browser's default font size), so the website
+matches the app by default while following the visitor's font-size setting and text zoom. Border thicknesses stay in px,
+so hairlines remain crisp. Viewport-dependent (fluid) sizes are set in the layout, not here.
+*/
+:root {
+    /* Spacing: 6, 12, 18, 22, 26, 32, 48 px */
+    --spacing-xxs: 0.375rem;
+    --spacing-xs: 0.75rem;
+    --spacing-sm: 1.125rem;
+    --spacing-md: 1.375rem;
+    --spacing-lg: 1.625rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 3rem;
+
+    /* Radius: 2, 6, 8, 10, 12, 14 px; circular stays a large fixed value that always rounds fully */
+    --radius-xxs: 0.125rem;
+    --radius-xs: 0.375rem;
+    --radius-sm: 0.5rem;
+    --radius-md: 0.625rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 0.875rem;
+    --radius-circular: 999px;
+
+    /* Typography: 12, 14, 16, 20, 24, 32 px */
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.25rem;
+    --font-size-xl: 1.5rem;
+    --font-size-xxl: 2rem;
+
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+
+    /* Icon sizes: 12, 16, 18, 24, 28, 32 px */
+    --icon-size-xxs: 0.75rem;
+    --icon-size-xs: 1rem;
+    --icon-size-sm: 1.125rem;
+    --icon-size-md: 1.5rem;
+    --icon-size-lg: 1.75rem;
+    --icon-size-xl: 2rem;
+
+    /* Border thickness: px, so 1px lines stay sharp at any font size */
+    --border-thickness: 1px;
+    --border-thickness-medium: 1.5px;
+    --border-thickness-thick: 2px;
+}
